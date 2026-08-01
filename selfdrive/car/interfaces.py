@@ -215,7 +215,7 @@ class CarInterfaceBase(ABC):
           fp_ret.safetyConfigs[-1].safetyParam |= Panda.FLAG_SUBARU_SNG
 
       elif platform in ToyotaCAR:
-        if frogpilot_toggles.toyota_dsu_bypass and not (CP.flags & ToyotaFlags.SMART_DSU.value) and not CP.enableDsu and candidate not in (TSS2_CAR | UNSUPPORTED_DSU_CAR):
+        if (frogpilot_toggles.toyota_dsu_bypass or 0x343 in fingerprint.get(2, {}) or 0x4CB in fingerprint.get(2, {})) and not (CP.flags & ToyotaFlags.SMART_DSU.value) and not CP.enableDsu and candidate not in (TSS2_CAR | UNSUPPORTED_DSU_CAR):
           fp_ret.fpFlags |= ToyotaFrogPilotFlags.DSU_BYPASS.value
 
         if 0x23 in fingerprint[0]:

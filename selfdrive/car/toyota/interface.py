@@ -122,7 +122,7 @@ class CarInterface(CarInterfaceBase):
     #  - TSS2 radar ACC cars w/o smartDSU installed (disables radar)
     #  - TSS-P DSU-less cars w/ CAN filter installed (no radar parser yet)
 
-    dsu_bypass = frogpilot_toggles.toyota_dsu_bypass and not use_sdsu and not ret.enableDsu and candidate not in (TSS2_CAR | UNSUPPORTED_DSU_CAR)
+    dsu_bypass = (frogpilot_toggles.toyota_dsu_bypass or 0x343 in fingerprint.get(2, {}) or 0x4CB in fingerprint.get(2, {})) and not use_sdsu and not ret.enableDsu and candidate not in (TSS2_CAR | UNSUPPORTED_DSU_CAR)
 
     ret.openpilotLongitudinalControl = use_sdsu or ret.enableDsu or candidate in (TSS2_CAR - RADAR_ACC_CAR) or bool(ret.flags & ToyotaFlags.DISABLE_RADAR.value) or dsu_bypass
     ret.openpilotLongitudinalControl &= not frogpilot_toggles.disable_openpilot_long
