@@ -40,7 +40,7 @@ def register(show_spinner=False, register_konik=False) -> str | None:
   elif needs_registration or register_konik:
     if show_spinner:
       spinner = Spinner()
-      spinner.update("registering device")
+      spinner.update("")
 
     # Create registration token, in the future, this key will make JWTs directly
     with open(Paths.persist_root()+"/comma/id_rsa.pub") as f1, open(Paths.persist_root()+"/comma/id_rsa") as f2:
@@ -60,7 +60,7 @@ def register(show_spinner=False, register_konik=False) -> str | None:
         time.sleep(1)
 
       if time.monotonic() - start_time > 60 and show_spinner:
-        spinner.update(f"registering device - serial: {serial}, IMEI: ({imei1}, {imei2})")
+        spinner.update("")
 
     params.put("IMEI", imei1)
     params.put("HardwareSerial", serial)

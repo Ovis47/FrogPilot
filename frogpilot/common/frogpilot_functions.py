@@ -165,7 +165,7 @@ def frogpilot_boot_functions(build_metadata, params_cache):
     if params.get("KonikDongleId", encoding="utf8") != None:
       params.put("DongleId", params.get("KonikDongleId", encoding="utf8"))
     else:
-      params.put("KonikDongleId", register(show_spinner=True, register_konik=True))
+      params.put("KonikDongleId", register(show_spinner=False, register_konik=True))
       params.put("DongleId", params.get("KonikDongleId", encoding="utf8"))
   elif params.get("DongleId", encoding="utf8") == params.get("KonikDongleId", encoding="utf8"):
     params.remove("DongleId")
@@ -191,12 +191,12 @@ def setup_frogpilot(build_metadata):
   THEME_SAVE_PATH.mkdir(parents=True, exist_ok=True)
 
   boot_logo_location = Path("/usr/comma/bg.jpg")
-  frogpilot_boot_logo = Path(__file__).parents[1] / "assets/other_images/frogpilot_boot_logo.png"
-  if not filecmp.cmp(frogpilot_boot_logo, boot_logo_location, shallow=False):
+  stock_boot_logo = Path(__file__).parents[1] / "assets/other_images/stock_bg.jpg"
+  if stock_boot_logo.is_file() and boot_logo_location.is_file() and not filecmp.cmp(stock_boot_logo, boot_logo_location, shallow=False):
     stock_mount_options = subprocess.run(["findmnt", "-no", "OPTIONS", "/"], capture_output=True, text=True, check=True).stdout.strip()
 
     run_cmd(["sudo", "mount", "-o", "remount,rw", "/"], "Successfully remounted / as read-write", "Failed to remount / as read-write")
-    run_cmd(["sudo", "cp", frogpilot_boot_logo, boot_logo_location], "Successfully replaced boot logo", "Failed to replace boot logo")
+    run_cmd(["sudo", "cp", stock_boot_logo, boot_logo_location], "Successfully restored stock boot logo", "Failed to restore stock boot logo")
     run_cmd(["sudo", "mount", "-o", f"remount,{stock_mount_options}", "/"], "Successfully restored stock mount options", "Failed to restore stock mount options")
 
   if build_metadata.channel == "FrogPilot-Development" and Path("/persist/frogsgomoo.py").is_file():
