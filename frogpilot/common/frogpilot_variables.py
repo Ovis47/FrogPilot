@@ -180,6 +180,7 @@ frogpilot_default_params: list[tuple[str, str | bytes, int, str]] = [
   ("AlwaysOnLateralMain", "1", 2, "0"),
   ("AMapKey1", "", 0, ""),
   ("AMapKey2", "", 0, ""),
+  ("AutoCruiseReady", "1", 0, "0"),
   ("AutomaticallyDownloadModels", "1", 1, "0"),
   ("AutomaticUpdates", "1", 0, "1"),
   ("AvailableModelNames", "", 1, ""),
@@ -1046,6 +1047,7 @@ class FrogPilotVariables:
     toyota_doors = toggle.car_make == "toyota" and (params.get_bool("ToyotaDoors") if toggle.tuning_level >= level["ToyotaDoors"] else default.get_bool("ToyotaDoors"))
     toggle.lock_doors = toyota_doors and (params.get_bool("LockDoors") if toggle.tuning_level >= level["LockDoors"] else default.get_bool("LockDoors"))
     toggle.unlock_doors = toyota_doors and (params.get_bool("UnlockDoors") if toggle.tuning_level >= level["UnlockDoors"] else default.get_bool("UnlockDoors"))
+    toggle.auto_cruise_ready = toggle.car_make == "toyota" and (params.get_bool("AutoCruiseReady") if toggle.tuning_level >= level["AutoCruiseReady"] else default.get_bool("AutoCruiseReady"))
 
     toggle.toyota_dsu_bypass = toggle.car_make == "toyota" and (params.get_bool("ToyotaDSUBypass") if toggle.tuning_level >= level["ToyotaDSUBypass"] else default.get_bool("ToyotaDSUBypass"))
 

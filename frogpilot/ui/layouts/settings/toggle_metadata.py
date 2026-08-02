@@ -2112,6 +2112,14 @@ VEHICLE_SETTINGS_TOGGLES = (
     tuning_level=0,
   ),
   ToggleDefinition(
+    title=("Auto Cruise Control Ready"),
+    param="AutoCruiseReady",
+    car_params=["toyota_brand"],
+    description=("<b>Automatically set cruise control to ready state</b> when shifting out of park."),
+    parent_param="ToyotaToggles",
+    tuning_level=0,
+  ),
+  ToggleDefinition(
     title=("Automatically Lock/Unlock Doors"),
     param="ToyotaDoors",
     button_labels=["Lock", "Unlock"],

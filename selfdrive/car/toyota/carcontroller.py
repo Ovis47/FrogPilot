@@ -93,6 +93,7 @@ class CarController(CarControllerBase):
 
     # FrogPilot variables
     self.doors_locked = False
+    self.cruise_ready_sent = False
 
   def update(self, CC, CS, now_nanos, frogpilot_toggles):
     actuators = CC.actuators
@@ -368,6 +369,14 @@ class CarController(CarControllerBase):
       if frogpilot_toggles.unlock_doors:
         can_sends.append(make_can_msg(0x750, UNLOCK_CMD, 0))
       self.doors_locked = False
+
+    if not self.cruise_ready_sent and CS.out.gearShifter != PARK:
+      if frogpilot_toggles.auto_cruise_ready and not CS.out.cruiseState.available:
+        if self.CP.pcmCruise:
+          can_sends.append(make_can_msg(0x750, b"\x40\x05\x30\x11\x00\x01\x00\x00", 0))
+      self.cruise_ready_sent = True
+    elif self.cruise_ready_sent and CS.out.gearShifter == PARK:
+      self.cruise_ready_sent = False
 
     self.frame += 1
     return new_actuators, can_sends
