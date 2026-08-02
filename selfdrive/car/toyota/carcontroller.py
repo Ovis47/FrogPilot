@@ -371,6 +371,8 @@ class CarController(CarControllerBase):
       self.doors_locked = False
 
     if not self.cruise_ready_sent and CS.out.gearShifter != PARK:
+      if frogpilot_toggles.auto_cruise_ready and not CS.out.cruiseState.available:
+        can_sends.append(toyotacan.create_main_button_command(self.packer))
       self.cruise_ready_sent = True
     elif self.cruise_ready_sent and CS.out.gearShifter == PARK:
       self.cruise_ready_sent = False
