@@ -91,6 +91,8 @@ def manager_init() -> None:
   params.put("GitRemote", build_metadata.openpilot.git_origin)
   params.put_bool("IsTestedBranch", build_metadata.tested_channel)
   params.put_bool("IsReleaseBranch", build_metadata.release_channel)
+  params.put("UpdaterCurrentDescription", f"{build_metadata.openpilot.version} / {build_metadata.channel} / {build_metadata.openpilot.git_commit[:7]}")
+
 
   # set dongle id
   reg_res = register(show_spinner=True)
