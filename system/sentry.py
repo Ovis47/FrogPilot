@@ -10,8 +10,6 @@ from openpilot.system.hardware import HARDWARE, PC
 from openpilot.common.swaglog import cloudlog
 from openpilot.system.version import get_build_metadata, get_version
 
-from openpilot.frogpilot.common.frogpilot_variables import ERROR_LOGS_PATH, params
-
 class SentryProject(Enum):
   # python project
   SELFDRIVE = "https://7ba43fba4cfcf1a6c0eff83d40374e43@o4505034923769856.ingest.us.sentry.io/4505034930651136"
@@ -61,6 +59,8 @@ def set_tag(key: str, value: str) -> None:
 
 
 def save_exception(exc_text: str, crash_log) -> None:
+  from openpilot.frogpilot.common.frogpilot_variables import ERROR_LOGS_PATH
+
   files = [
     ERROR_LOGS_PATH / datetime.now().astimezone().strftime("%Y-%m-%d--%H-%M-%S.log"),
     ERROR_LOGS_PATH / "error.txt"
