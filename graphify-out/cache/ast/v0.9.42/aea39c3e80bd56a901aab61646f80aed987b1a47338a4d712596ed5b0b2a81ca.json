@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_body_board_inc_stm32f4xx_hal_driver_inc_stm32_assert_template_h", "label": "stm32_assert_template.h", "file_type": "code", "source_file": "body/board/inc/STM32F4xx_HAL_Driver/Inc/stm32_assert_template.h", "source_location": "L1"}], "edges": [], "raw_calls": [], "parse_errors": {"first_error_line": 50, "multiline_error": false}}

@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_third_party_acados_acados_template_c_templates_tera_constraints_in_h", "label": "constraints.in.h", "file_type": "code", "source_file": "third_party/acados/acados_template/c_templates_tera/constraints.in.h", "source_location": "L1"}], "edges": [], "raw_calls": [], "parse_errors": {"first_error_line": 1, "multiline_error": true}}
