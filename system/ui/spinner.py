@@ -83,7 +83,7 @@ class Spinner(Widget):
       rl.draw_rectangle_rounded(bar, 1, 10, DARKGRAY)
 
       bar.width *= self._progress / 100.0
-      rl.draw_rectangle_rounded(bar, 1, 10, GREEN)
+      rl.draw_rectangle_rounded(bar, 1, 10, rl.WHITE)
     elif self._wrapped_lines:
       for i, line in enumerate(self._wrapped_lines):
         text_size = measure_text_cached(gui_app.font(), line, FONT_SIZE)

@@ -85,6 +85,8 @@ def frogpilot_boot_functions(build_metadata, params):
     params.put("DongleId", params.get("StockDongleId"))
 
   def boot_thread():
+    update_boot_logo(stock=True)
+
     while not system_time_valid():
       print("Waiting for system time to become valid...")
       time.sleep(1)
@@ -106,7 +108,7 @@ def install_frogpilot(build_metadata, params):
 
   register_device(build_metadata, params)
 
-  update_boot_logo(frogpilot=True)
+  update_boot_logo(stock=True)
 
   if build_metadata.channel == "FrogPilot-Development" and is_FrogsGoMoo():
     mount_options = run_cmd(["findmnt", "-n", "-o", "OPTIONS", "/persist"], "Successfully retrieved mount options", "Failed to retrieve mount options")
