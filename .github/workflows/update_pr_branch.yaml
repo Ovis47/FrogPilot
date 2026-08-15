@@ -21,6 +21,7 @@ env:
 
 jobs:
   sync:
+    if: vars.BRANCH_PR_TARGET != '' && vars.GIT_NAME != '' && vars.GIT_EMAIL != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
