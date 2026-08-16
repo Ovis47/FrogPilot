@@ -44,7 +44,7 @@ UNLOCK_CMD = b"\x40\x05\x30\x11\x00\x40\x00\x00"
 
 
 def get_long_tune(CP, params):
-  if CP.carFingerprint in TSS2_CAR:
+  if CP.flags & ToyotaFlags.HYBRID.value or CP.carFingerprint in TSS2_CAR:
     kiBP = [2., 5.]
     kiV = [0.5, 0.25]
   else:
